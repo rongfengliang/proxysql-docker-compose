@@ -11,6 +11,15 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       TZ: Asia/Shanghai
+  gitbase:
+    image: srcd/gitbase:v0.24.0-beta1
+    volumes: 
+    - "./git-codes:/opt/repos"
+    environment: 
+    -  "GITBASE_USER=rong"
+    -  "GITBASE_PASSWORD=demoapp"
+    ports: 
+    - "3307:3306"
   proxysql:
     image: proxysql/proxysql:2.0.5
     volumes: 
@@ -18,3 +27,4 @@ services:
     ports:
     - "6033:6033"
     - "6032:6032"
+    - "6080:6080"

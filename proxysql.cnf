@@ -4,6 +4,7 @@ admin_variables=
 {
     admin_credentials="admin:admin;radmin:radmin"
     mysql_ifaces="0.0.0.0:6032"
+    admin-web_enabled=true
 }
 
 mysql_variables=
@@ -40,6 +41,12 @@ mysql_variables=
  		port=3306
  		hostgroup=0
  		max_connections=200
+ 	},
+    {
+ 		address="gitbase"
+ 		port=3306
+ 		hostgroup=1
+ 		max_connections=200
  	}
  )
 
@@ -49,6 +56,14 @@ mysql_users:
  		username = "root"
  		password = "dalongrong"
  		default_hostgroup = 0
+ 		max_connections=1000
+ 		default_schema="information_schema"
+ 		active = 1
+ 	},
+    {
+ 		username = "rong"
+        password ="demoapp"
+ 		default_hostgroup = 1
  		max_connections=1000
  		default_schema="information_schema"
  		active = 1
