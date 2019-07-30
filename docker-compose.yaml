@@ -1,5 +1,16 @@
 version: "3"
 services:
+  mysql2:
+    image: mysql:5.7.16
+    ports:
+      - 3308:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: dalongrong
+      MYSQL_DATABASE: test
+      MYSQL_USER: rong
+      MYSQL_PASSWORD: demoapp
+      TZ: Asia/Shanghai
   mysql:
     image: mysql:5.7.16
     ports:
@@ -8,22 +19,23 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: dalongrong
       MYSQL_DATABASE: test
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test
+      MYSQL_USER: rong
+      MYSQL_PASSWORD: demoapp
       TZ: Asia/Shanghai
-  gitbase:
-    image: srcd/gitbase:v0.24.0-beta1
-    volumes: 
-    - "./git-codes:/opt/repos"
-    environment: 
-    -  "GITBASE_USER=rong"
-    -  "GITBASE_PASSWORD=demoapp"
-    ports: 
-    - "3307:3306"
+  # gitbase:
+  #   image: srcd/gitbase:v0.24.0-beta1
+  #   volumes: 
+  #   - "./git-codes:/opt/repos"
+  #   environment: 
+  #   -  "GITBASE_USER=rong"
+  #   -  "GITBASE_PASSWORD=demoapp"
+  #   ports: 
+  #   - "3307:3306"
   proxysql:
     image: proxysql/proxysql:2.0.5
     volumes: 
     - "./proxysql.cnf:/etc/proxysql.cnf"
+    - "./proxysql:/var/lib/proxysql"
     ports:
     - "6033:6033"
     - "6032:6032"
