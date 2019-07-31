@@ -1,24 +1,28 @@
 datadir="/var/lib/proxysql"
-
+errorlog="/var/lib/proxysql/proxysql.log"
 admin_variables=
 {
     admin_credentials="admin:admin;radmin:radmin"
     mysql_ifaces="0.0.0.0:6032"
     admin-web_enabled=true
+    debug=true
 }
 
 mysql_variables=
 {
     threads=4
+    mysql-auditlog_filename="mysql.log"
     max_connections=2048
     default_query_delay=0
     default_query_timeout=36000000
-    have_compress=true
+    have_compress=false
     poll_timeout=2000
+    mysql-autocommit_false_is_transaction=true
     interfaces="0.0.0.0:6033"
     default_schema="information_schema"
     stacksize=1048576
-    server_version="5.5.30"
+    server_version="8.0.0"
+    mysql-forward_autocommit=true
     connect_timeout_server=3000
     monitor_username="rong"
     monitor_password="demoapp"
@@ -47,6 +51,12 @@ mysql_variables=
  		port=3306
  		hostgroup=1
  		max_connections=200
+ 	},
+    {
+ 		address="gitbase"
+ 		port=3306
+ 		hostgroup=4
+ 		max_connections=200
  	}
  )
 
@@ -63,9 +73,10 @@ mysql_users:
     {
  		username = "rong"
         password ="demoapp"
- 		default_hostgroup = 1
+ 		default_hostgroup = 4
  		max_connections=1000
- 		default_schema="information_schema"
+ 		default_schema="gitbase"
  		active = 1
+		transaction_persistent=0
  	}
  )

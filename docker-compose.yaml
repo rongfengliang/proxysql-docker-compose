@@ -22,17 +22,17 @@ services:
       MYSQL_USER: rong
       MYSQL_PASSWORD: demoapp
       TZ: Asia/Shanghai
-  # gitbase:
-  #   image: srcd/gitbase:v0.24.0-beta1
-  #   volumes: 
-  #   - "./git-codes:/opt/repos"
-  #   environment: 
-  #   -  "GITBASE_USER=rong"
-  #   -  "GITBASE_PASSWORD=demoapp"
-  #   ports: 
-  #   - "3307:3306"
+  gitbase:
+    image: srcd/gitbase:v0.24.0-beta1
+    volumes: 
+    - "./git-codes:/opt/repos"
+    environment: 
+    -  "GITBASE_USER=rong"
+    -  "GITBASE_PASSWORD=demoapp"
+    ports: 
+    - "3307:3306"
   proxysql:
-    image: proxysql/proxysql:2.0.5
+    image: proxysql/proxysql:2.0.6
     volumes: 
     - "./proxysql.cnf:/etc/proxysql.cnf"
     - "./proxysql:/var/lib/proxysql"
